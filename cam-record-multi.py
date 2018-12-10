@@ -10,10 +10,10 @@ with picamera.PiCamera() as camera:
 	hC = datetime.datetime.now()
 	fichier = '{:%H%M%S}'.format(hC) 
 	camera.start_recording('/home/pi/capture/%s.h264' % fichier)
-	camera.wait_recording(60)
-	for i in range(1, 5):
+	camera.wait_recording(300)
+	for i in range(1, 3):
 		hC = datetime.datetime.now()
 		fichier = '{:%H%M%S}'.format(hC)
 		camera.split_recording('/home/pi/capture/%s.h264' % fichier)
-		camera.wait_recording(60)
+		camera.wait_recording(300)
 	camera.stop_recording()
