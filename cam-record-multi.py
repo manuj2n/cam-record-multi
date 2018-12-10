@@ -2,12 +2,18 @@
 # -*- coding: utf-8 -*-
 # capture des fichiers videos successifs
 import picamera
+import os
+import datetime
 
 with picamera.PiCamera() as camera:
-    camera.resolution = (1280, 720)
-    camera.start_recording('/home/pi/capture/1.h264')
-    camera.wait_recording(120)
-    for i in range(2, 6):
-        camera.split_recording('/home/pi/capture/%d.h264' % i)
-        camera.wait_recording(120)
-    camera.stop_recording()
+	camera.resolution = (1280, 720)
+	hC = datetime.datetime.now()
+	fichier = '{:%H%M%S}'.format(hC) 
+	camera.start_recording('/home/pi/capture/%s.h264' % fichier)
+	camera.wait_recording(60)
+	for i in range(1, 5):
+		hC = datetime.datetime.now()
+		fichier = '{:%H%M%S}'.format(hC)
+		camera.split_recording('/home/pi/capture/%s.h264' % fichier)
+		camera.wait_recording(60)
+	camera.stop_recording()
